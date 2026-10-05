@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1791235515294,
+      "tag": "0000_orcaja_schema",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791235548491,
+      "tag": "0001_logos_policies",
+      "breakpoints": true
+    }
+  ]
+}
