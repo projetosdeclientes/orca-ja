@@ -5,3 +5,5 @@
 - token_publico: 64 caracteres hexadecimais aleatórios (2 UUIDs v4) gerados por trigger; não pode ser alterado depois.
 - observacoes_admin: protegido por permissão de coluna (usuários comuns não conseguem ler a coluna); o Super Admin lê via funções admin_* que checam o papel no banco. Trigger impede dono de alterar ativo, pago_ate, slug e observacoes_admin.
 - Empresa suspensa: além da tela de bloqueio, a RLS nega acesso a produtos/orçamentos etc. dessa empresa.
+- Logos: bucket privado (workspace bloqueia buckets públicos). Ao enviar, o app gera um link assinado de 10 anos e grava em empresas.logo_url, para a logo aparecer também na página pública.
+- Cadastro público desativado na configuração de autenticação (disable_signup = true); usuários são criados só pelo servidor com a chave de serviço.
