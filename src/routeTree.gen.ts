@@ -13,7 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedClienteRouteImport } from './routes/_authenticated/_cliente'
+import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as AuthenticatedClienteConfigRouteImport } from './routes/_authenticated/_cliente/config'
 import { Route as AuthenticatedClienteNovoRouteImport } from './routes/_authenticated/_cliente/novo'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminConfiguracoesRouteImport } from './routes/_authenticated/admin/configuracoes'
+import { Route as AuthenticatedClienteOrcamentosIndexRouteImport } from './routes/_authenticated/_cliente/orcamentos.index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -33,43 +38,105 @@ const AuthenticatedClienteRoute = AuthenticatedClienteRouteImport.update({
   id: '/_cliente',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedClienteConfigRoute =
+  AuthenticatedClienteConfigRouteImport.update({
+    id: '/config',
+    path: '/config',
+    getParentRoute: () => AuthenticatedClienteRoute,
+  } as any)
 const AuthenticatedClienteNovoRoute =
   AuthenticatedClienteNovoRouteImport.update({
     id: '/novo',
     path: '/novo',
     getParentRoute: () => AuthenticatedClienteRoute,
   } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminConfiguracoesRoute =
+  AuthenticatedAdminConfiguracoesRouteImport.update({
+    id: '/configuracoes',
+    path: '/configuracoes',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedClienteOrcamentosIndexRoute =
+  AuthenticatedClienteOrcamentosIndexRouteImport.update({
+    id: '/orcamentos/',
+    path: '/orcamentos/',
+    getParentRoute: () => AuthenticatedClienteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/config': typeof AuthenticatedClienteConfigRoute
   '/novo': typeof AuthenticatedClienteNovoRoute
+  '/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/orcamentos/': typeof AuthenticatedClienteOrcamentosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/config': typeof AuthenticatedClienteConfigRoute
   '/novo': typeof AuthenticatedClienteNovoRoute
+  '/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/orcamentos': typeof AuthenticatedClienteOrcamentosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/login': typeof LoginRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/_cliente': typeof AuthenticatedClienteRouteWithChildren
+  '/_authenticated/_cliente/config': typeof AuthenticatedClienteConfigRoute
   '/_authenticated/_cliente/novo': typeof AuthenticatedClienteNovoRoute
+  '/_authenticated/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/_cliente/orcamentos/': typeof AuthenticatedClienteOrcamentosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/novo'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/admin'
+    | '/config'
+    | '/novo'
+    | '/admin/configuracoes'
+    | '/admin/'
+    | '/orcamentos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/novo'
+  to:
+    | '/'
+    | '/login'
+    | '/config'
+    | '/novo'
+    | '/admin/configuracoes'
+    | '/admin'
+    | '/orcamentos'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/login'
+    | '/_authenticated/admin'
     | '/_authenticated/_cliente'
+    | '/_authenticated/_cliente/config'
     | '/_authenticated/_cliente/novo'
+    | '/_authenticated/admin/configuracoes'
+    | '/_authenticated/admin/'
+    | '/_authenticated/_cliente/orcamentos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -108,6 +175,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedClienteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/_cliente/config': {
+      id: '/_authenticated/_cliente/config'
+      path: '/config'
+      fullPath: '/config'
+      preLoaderRoute: typeof AuthenticatedClienteConfigRouteImport
+      parentRoute: typeof AuthenticatedClienteRoute
+    }
     '/_authenticated/_cliente/novo': {
       id: '/_authenticated/_cliente/novo'
       path: '/novo'
@@ -115,25 +196,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedClienteNovoRouteImport
       parentRoute: typeof AuthenticatedClienteRoute
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/configuracoes': {
+      id: '/_authenticated/admin/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/admin/configuracoes'
+      preLoaderRoute: typeof AuthenticatedAdminConfiguracoesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/_cliente/orcamentos/': {
+      id: '/_authenticated/_cliente/orcamentos/'
+      path: '/orcamentos'
+      fullPath: '/orcamentos/'
+      preLoaderRoute: typeof AuthenticatedClienteOrcamentosIndexRouteImport
+      parentRoute: typeof AuthenticatedClienteRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminConfiguracoesRoute: typeof AuthenticatedAdminConfiguracoesRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminConfiguracoesRoute: AuthenticatedAdminConfiguracoesRoute,
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
+
 interface AuthenticatedClienteRouteChildren {
+  AuthenticatedClienteConfigRoute: typeof AuthenticatedClienteConfigRoute
   AuthenticatedClienteNovoRoute: typeof AuthenticatedClienteNovoRoute
+  AuthenticatedClienteOrcamentosIndexRoute: typeof AuthenticatedClienteOrcamentosIndexRoute
 }
 
 const AuthenticatedClienteRouteChildren: AuthenticatedClienteRouteChildren = {
+  AuthenticatedClienteConfigRoute: AuthenticatedClienteConfigRoute,
   AuthenticatedClienteNovoRoute: AuthenticatedClienteNovoRoute,
+  AuthenticatedClienteOrcamentosIndexRoute:
+    AuthenticatedClienteOrcamentosIndexRoute,
 }
 
 const AuthenticatedClienteRouteWithChildren =
   AuthenticatedClienteRoute._addFileChildren(AuthenticatedClienteRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
   AuthenticatedClienteRoute: typeof AuthenticatedClienteRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
   AuthenticatedClienteRoute: AuthenticatedClienteRouteWithChildren,
 }
 
