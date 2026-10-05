@@ -1,8 +1,8 @@
 # Progresso OrçaJá
 
 ## Etapa 1: Base, login, permissões e Super Admin
-- [ ] 1.1 Banco de dados (tabelas, FKs, índices, RLS, funções auxiliares, número sequencial, token público)
-- [ ] 1.2 Storage: bucket "logos"
+- [x] 1.1 Banco de dados (tabelas, FKs, índices, RLS, funções auxiliares, número sequencial, token público)
+- [x] 1.2 Storage: bucket "logos"
 - [ ] 1.3 Login e rotas protegidas por papel + tela de acesso suspenso
 - [ ] 1.4 Layout mobile first e tema (cor da empresa)
 - [ ] 1.5 /primeiro-acesso (criação do primeiro super admin, trava no servidor)
