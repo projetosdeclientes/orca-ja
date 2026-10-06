@@ -7,3 +7,4 @@
 - Empresa suspensa: além da tela de bloqueio, a RLS nega acesso a produtos/orçamentos etc. dessa empresa.
 - Logos: bucket privado (workspace bloqueia buckets públicos). Ao enviar, o app gera um link assinado de 10 anos e grava em empresas.logo_url, para a logo aparecer também na página pública.
 - Cadastro público desativado na configuração de autenticação (disable_signup = true); usuários são criados só pelo servidor com a chave de serviço.
+- Modelos Vidraçaria/Cortinas (src/lib/modelos.ts) foram criados junto da tela de nova empresa (1.8) para conectar direto, evitando retrabalho na 2.5.
