@@ -29,7 +29,7 @@ export function slugUnico(nome: string): string {
 /** Dias de atraso (positivo) se pago_ate < hoje; senão 0. */
 export function diasVencida(pagoAte: string | null): number {
   if (!pagoAte) return 0;
-  const [a, m, d] = pagoAte.split("-").map(Number);
+  const [a = 0, m = 1, d = 1] = pagoAte.split("-").map(Number);
   const venc = new Date(a, m - 1, d).getTime();
   const hoje = new Date();
   const h = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()).getTime();

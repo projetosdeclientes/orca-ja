@@ -37,14 +37,14 @@ function EditarEmpresa() {
   if (error || !empresa) return <Erro texto="Empresa não encontrada." />;
 
   async function salvar() {
-    if (f.nome.trim().length < 2) return toast.error("Informe o nome.");
+    if (f.nome.trim().length < 2) { toast.error("Informe o nome."); return; }
     setSalvando(true);
     const { error: e } = await supabase
       .from("empresas")
       .update({ nome: f.nome.trim(), whatsapp: whatsComDDI(f.whatsapp) || null, pago_ate: f.pago_ate || null, observacoes_admin: f.observacoes_admin || null, ativo: f.ativo })
       .eq("id", id);
     setSalvando(false);
-    if (e) return toast.error("Não foi possível salvar.");
+    if (e) { toast.error("Não foi possível salvar."); return; }
     toast.success("Alterações salvas.");
     qc.invalidateQueries({ queryKey: ["admin-empresas"] });
     navigate({ to: "/admin" });

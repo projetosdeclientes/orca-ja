@@ -41,10 +41,10 @@ function NovaEmpresa() {
 
   async function criar(e: FormEvent) {
     e.preventDefault();
-    if (f.nome.trim().length < 2) return toast.error("Informe o nome da empresa.");
-    if (!f.email.trim()) return toast.error("Informe o e-mail do dono.");
-    if (f.senha.length < 8) return toast.error("A senha precisa de pelo menos 8 caracteres.");
-    if (origem === "copiar" && !copiarDe) return toast.error("Escolha a empresa a copiar.");
+    if (f.nome.trim().length < 2) { toast.error("Informe o nome da empresa."); return; }
+    if (!f.email.trim()) { toast.error("Informe o e-mail do dono."); return; }
+    if (f.senha.length < 8) { toast.error("A senha precisa de pelo menos 8 caracteres."); return; }
+    if (origem === "copiar" && !copiarDe) { toast.error("Escolha a empresa a copiar."); return; }
     setEnviando(true);
     let empresaId: string | null = null;
     try {

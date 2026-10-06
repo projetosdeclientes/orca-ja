@@ -22,6 +22,7 @@ import { Route as AuthenticatedClienteNovoRouteImport } from './routes/_authenti
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminConfiguracoesRouteImport } from './routes/_authenticated/admin/configuracoes'
 import { Route as AuthenticatedClienteOrcamentosIndexRouteImport } from './routes/_authenticated/_cliente/orcamentos.index'
+import { Route as AuthenticatedAdminEmpresasIdRouteImport } from './routes/_authenticated/admin/empresas.$id'
 import { Route as AuthenticatedAdminEmpresasNovaRouteImport } from './routes/_authenticated/admin/empresas.nova'
 
 const IndexRoute = IndexRouteImport.update({
@@ -91,6 +92,12 @@ const AuthenticatedClienteOrcamentosIndexRoute =
     path: '/orcamentos/',
     getParentRoute: () => AuthenticatedClienteRoute,
   } as any)
+const AuthenticatedAdminEmpresasIdRoute =
+  AuthenticatedAdminEmpresasIdRouteImport.update({
+    id: '/empresas/$id',
+    path: '/empresas/$id',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminEmpresasNovaRoute =
   AuthenticatedAdminEmpresasNovaRouteImport.update({
     id: '/empresas/nova',
@@ -109,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/novo': typeof AuthenticatedClienteNovoRoute
   '/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/empresas/$id': typeof AuthenticatedAdminEmpresasIdRoute
   '/admin/empresas/nova': typeof AuthenticatedAdminEmpresasNovaRoute
   '/orcamentos/': typeof AuthenticatedClienteOrcamentosIndexRoute
 }
@@ -122,6 +130,7 @@ export interface FileRoutesByTo {
   '/novo': typeof AuthenticatedClienteNovoRoute
   '/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/empresas/$id': typeof AuthenticatedAdminEmpresasIdRoute
   '/admin/empresas/nova': typeof AuthenticatedAdminEmpresasNovaRoute
   '/orcamentos': typeof AuthenticatedClienteOrcamentosIndexRoute
 }
@@ -139,6 +148,7 @@ export interface FileRoutesById {
   '/_authenticated/_cliente/novo': typeof AuthenticatedClienteNovoRoute
   '/_authenticated/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/empresas/$id': typeof AuthenticatedAdminEmpresasIdRoute
   '/_authenticated/admin/empresas/nova': typeof AuthenticatedAdminEmpresasNovaRoute
   '/_authenticated/_cliente/orcamentos/': typeof AuthenticatedClienteOrcamentosIndexRoute
 }
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/novo'
     | '/admin/configuracoes'
     | '/admin/'
+    | '/admin/empresas/$id'
     | '/admin/empresas/nova'
     | '/orcamentos/'
   fileRoutesByTo: FileRoutesByTo
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/novo'
     | '/admin/configuracoes'
     | '/admin'
+    | '/admin/empresas/$id'
     | '/admin/empresas/nova'
     | '/orcamentos'
   id:
@@ -184,6 +196,7 @@ export interface FileRouteTypes {
     | '/_authenticated/_cliente/novo'
     | '/_authenticated/admin/configuracoes'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/empresas/$id'
     | '/_authenticated/admin/empresas/nova'
     | '/_authenticated/_cliente/orcamentos/'
   fileRoutesById: FileRoutesById
@@ -290,6 +303,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedClienteOrcamentosIndexRouteImport
       parentRoute: typeof AuthenticatedClienteRoute
     }
+    '/_authenticated/admin/empresas/$id': {
+      id: '/_authenticated/admin/empresas/$id'
+      path: '/empresas/$id'
+      fullPath: '/admin/empresas/$id'
+      preLoaderRoute: typeof AuthenticatedAdminEmpresasIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/empresas/nova': {
       id: '/_authenticated/admin/empresas/nova'
       path: '/empresas/nova'
@@ -303,6 +323,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminConfiguracoesRoute: typeof AuthenticatedAdminConfiguracoesRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminEmpresasIdRoute: typeof AuthenticatedAdminEmpresasIdRoute
   AuthenticatedAdminEmpresasNovaRoute: typeof AuthenticatedAdminEmpresasNovaRoute
 }
 
@@ -310,6 +331,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
   {
     AuthenticatedAdminConfiguracoesRoute: AuthenticatedAdminConfiguracoesRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+    AuthenticatedAdminEmpresasIdRoute: AuthenticatedAdminEmpresasIdRoute,
     AuthenticatedAdminEmpresasNovaRoute: AuthenticatedAdminEmpresasNovaRoute,
   }
 

@@ -21,7 +21,7 @@ export function DialogoClonar({ aberto, origem, onFechar, onConfirmar }: Dialogo
   }, [aberto]);
 
   async function confirmar() {
-    if (nome.trim().length < 2) return toast.error("Informe o nome da nova empresa.");
+    if (nome.trim().length < 2) { toast.error("Informe o nome da nova empresa."); return; }
     setEnviando(true);
     try {
       await onConfirmar(nome);
