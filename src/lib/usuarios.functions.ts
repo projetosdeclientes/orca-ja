@@ -25,7 +25,7 @@ const esquemaNovoUsuario = z.object({
 });
 
 export const criarPrimeiroSuperAdmin = createServerFn({ method: "POST" })
-  .inputValidator((d: unknown) => esquemaNovoUsuario.parse(d))
+  .validator((d: unknown) => esquemaNovoUsuario.parse(d))
   .handler(async ({ data }) => {
     // Trava definitiva verificada no servidor.
     if (await existeSuperAdmin()) throw new Error("O primeiro acesso já foi realizado.");
@@ -46,7 +46,7 @@ export const criarPrimeiroSuperAdmin = createServerFn({ method: "POST" })
 
 export const criarUsuarioEmpresa = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d: unknown) => esquemaNovoUsuario.extend({ empresa_id: z.string().uuid() }).parse(d))
+  .validator((d: unknown) => esquemaNovoUsuario.extend({ empresa_id: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
     // Valida o papel do CHAMADOR com o token dele (RLS aplicada).
     const { data: ehSuper, error: eRole } = await context.supabase.rpc("is_super_admin");
