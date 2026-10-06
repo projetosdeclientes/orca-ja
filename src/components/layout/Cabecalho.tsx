@@ -3,6 +3,7 @@ import { LogOut, Menu, Shield } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Empresa } from "@/lib/sessao";
 import { definirEmpresaAtiva } from "@/lib/empresa-ativa";
+import { SeletorEmpresa } from "./SeletorEmpresa";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export interface CabecalhoProps {
-  empresa: Pick<Empresa, "nome" | "logo_url">;
+  empresa: Pick<Empresa, "id" | "nome" | "logo_url">;
   isSuper: boolean;
 }
 
@@ -27,7 +28,7 @@ export function Cabecalho({ empresa, isSuper }: CabecalhoProps) {
             {empresa.nome.slice(0, 1).toUpperCase()}
           </span>
         )}
-        <span className="flex-1 truncate font-semibold text-foreground">{empresa.nome}</span>
+        {isSuper ? <SeletorEmpresa empresaId={empresa.id} /> : <span className="flex-1 truncate font-semibold text-foreground">{empresa.nome}</span>}
         <DropdownMenu>
           <DropdownMenuTrigger aria-label="Menu" className="grid h-10 w-10 place-items-center rounded-xl text-foreground hover:bg-muted">
             <Menu className="h-5 w-5" strokeWidth={1.75} />

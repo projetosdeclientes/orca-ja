@@ -79,17 +79,17 @@ function NovaEmpresa() {
   return (
     <form onSubmit={criar} className="mx-auto max-w-xl space-y-4 rounded-2xl border border-border bg-card p-6 shadow-card">
       <h1 className="text-xl font-bold text-foreground">Nova empresa</h1>
-      <div className="space-y-2"><Label>Nome da empresa</Label><Input className={campo} value={f.nome} onChange={(e) => setF({ ...f, nome: e.target.value })} /></div>
-      <div className="space-y-2"><Label>WhatsApp</Label><Input className={campo} inputMode="tel" placeholder="(11) 91234-5678" value={mascaraTelefone(f.whatsapp)} onChange={(e) => setF({ ...f, whatsapp: e.target.value })} /></div>
-      <div className="space-y-2"><Label>E-mail do dono</Label><Input className={campo} type="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} /></div>
+      <div className="space-y-2"><Label htmlFor="f-nome">Nome da empresa</Label><Input id="f-nome" className={campo} value={f.nome} onChange={(e) => setF({ ...f, nome: e.target.value })} /></div>
+      <div className="space-y-2"><Label htmlFor="f-whats">WhatsApp</Label><Input id="f-whats" className={campo} inputMode="tel" placeholder="(11) 91234-5678" value={mascaraTelefone(f.whatsapp)} onChange={(e) => setF({ ...f, whatsapp: e.target.value })} /></div>
+      <div className="space-y-2"><Label htmlFor="f-email">E-mail do dono</Label><Input id="f-email" className={campo} type="email" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} /></div>
       <div className="space-y-2">
-        <Label>Senha inicial</Label>
+        <Label htmlFor="f-senha">Senha inicial</Label>
         <div className="flex gap-2">
-          <Input className={campo} value={f.senha} onChange={(e) => setF({ ...f, senha: e.target.value })} />
+          <Input id="f-senha" className={campo} value={f.senha} onChange={(e) => setF({ ...f, senha: e.target.value })} />
           <Button type="button" variant="outline" className="h-11 rounded-xl" onClick={() => setF({ ...f, senha: gerarSenha() })}><KeyRound className="mr-1 h-4 w-4" />Gerar senha</Button>
         </div>
       </div>
-      <div className="space-y-2"><Label>Pago até</Label><Input className={campo} type="date" value={f.pago_ate} onChange={(e) => setF({ ...f, pago_ate: e.target.value })} /></div>
+      <div className="space-y-2"><Label htmlFor="f-pago">Pago até</Label><Input id="f-pago" className={campo} type="date" value={f.pago_ate} onChange={(e) => setF({ ...f, pago_ate: e.target.value })} /></div>
       <div className="space-y-2">
         <Label>Começar a partir de</Label>
         <RadioGroup value={origem} onValueChange={(v) => setOrigem(v as Origem)} className="space-y-1">
