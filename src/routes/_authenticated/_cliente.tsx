@@ -17,7 +17,9 @@ function useCorEmpresa(cor: string | undefined) {
     if (!cor || !/^#[0-9a-fA-F]{6}$/.test(cor)) return;
     const raiz = document.documentElement;
     raiz.style.setProperty("--primary", cor);
-    return () => raiz.style.removeProperty("--primary");
+    return () => {
+      raiz.style.removeProperty("--primary");
+    };
   }, [cor]);
 }
 
