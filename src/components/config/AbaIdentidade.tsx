@@ -29,22 +29,22 @@ export function AbaIdentidade({ empresa }: { empresa: Empresa }) {
   }
 
   async function enviarLogo(file: File) {
-    if (!file.type.startsWith("image/")) return toast.error("Escolha uma imagem.");
-    if (file.size > 2 * 1024 * 1024) return toast.error("A imagem deve ter até 2 MB.");
+    if (!file.type.startsWith("image/")) { toast.error("Escolha uma imagem."); return; }
+    if (file.size > 2 * 1024 * 1024) { toast.error("A imagem deve ter até 2 MB."); return; }
     setEnviandoLogo(true);
     const caminho = `${empresa.id}/logo-${Date.now()}.${file.name.split(".").pop() ?? "png"}`;
     const { error } = await supabase.storage.from("logos").upload(caminho, file, { upsert: true });
     const { data } = error ? { data: null } : await supabase.storage.from("logos").createSignedUrl(caminho, DEZ_ANOS);
     setEnviandoLogo(false);
-    if (!data?.signedUrl) return toast.error("Não foi possível enviar a logo.");
+    if (!data?.signedUrl) { toast.error("Não foi possível enviar a logo."); return; }
     setF((x) => ({ ...x, logo_url: data.signedUrl }));
     toast.success("Logo carregada. Toque em Salvar alterações.");
   }
 
   async function salvar() {
     const validade = Number(f.validade_dias);
-    if (f.nome.trim().length < 2) return toast.error("Informe o nome da empresa.");
-    if (!Number.isInteger(validade) || validade < 1 || validade > 365) return toast.error("Validade deve ser de 1 a 365 dias.");
+    if (f.nome.trim().length < 2) { toast.error("Informe o nome da empresa."); return; }
+    if (!Number.isInteger(validade) || validade < 1 || validade > 365) { toast.error("Validade deve ser de 1 a 365 dias."); return; }
     setSalvando(true);
     const { error } = await supabase.from("empresas").update({
       nome: f.nome.trim(), cor_primaria: f.cor_primaria, whatsapp: whatsComDDI(f.whatsapp) || null, endereco: f.endereco || null,
@@ -52,7 +52,7 @@ export function AbaIdentidade({ empresa }: { empresa: Empresa }) {
       prazo_entrega_padrao: f.prazo_entrega_padrao || null, validade_dias: validade, logo_url: f.logo_url,
     }).eq("id", empresa.id);
     setSalvando(false);
-    if (error) return toast.error("Não foi possível salvar.");
+    if (error) { toast.error("Não foi possível salvar."); return; }
     toast.success("Alterações salvas.");
     qc.invalidateQueries({ queryKey: ["sessao"] });
   }

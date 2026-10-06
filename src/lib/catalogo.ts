@@ -22,11 +22,11 @@ export async function carregarCatalogo(empresaId: string): Promise<Produto[]> {
     .order("ordem")
     .order("created_at");
   if (error) throw new Error("Não foi possível carregar os produtos.");
-  return (data ?? []).map((p) => {
+  return (data ?? []).map((p): Produto => {
     const { grupos_opcao, ...resto } = p as typeof p & { grupos_opcao: (Omit<Grupo, "opcoes"> & { opcoes: Opcao[] })[] };
     return {
       ...(resto as unknown as Omit<Produto, "grupos">),
-      grupos: (grupos_opcao ?? []).sort(porOrdem).map((g) => ({ ...g, opcoes: (g.opcoes ?? []).sort(porOrdem) })),
+      grupos: (grupos_opcao ?? []).sort(porOrdem).map((g) => ({ ...g, opcoes: (g.opcoes ?? []).sort(porOrdem) as Opcao[] })) as Grupo[],
     };
   });
 }
