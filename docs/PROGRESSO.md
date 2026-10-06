@@ -36,4 +36,5 @@
 - [ ] 5.4 Link de suporte em um único lugar
 - [ ] 5.5 PWA
 - [ ] 5.6 Testes do motor de cálculo
+- [ ] 5.8 Menu do usuário e troca de senha (executar ANTES da 5.7)
 - [ ] 5.7 Checklist final
