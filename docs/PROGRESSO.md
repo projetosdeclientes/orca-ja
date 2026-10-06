@@ -5,8 +5,8 @@
 - [x] 1.2 Storage: bucket "logos"
 - [x] 1.3 Login e rotas protegidas por papel + tela de acesso suspenso
 - [x] 1.4 Layout mobile first e tema (cor da empresa)
-- [ ] 1.5 /primeiro-acesso (criação do primeiro super admin, trava no servidor)
-- [ ] 1.6 Função de servidor "criar-usuario-empresa"
+- [x] 1.5 /primeiro-acesso (criação do primeiro super admin, trava no servidor)
+- [x] 1.6 Função de servidor "criar-usuario-empresa"
 - [ ] 1.7 Admin: lista de empresas (T11)
 - [ ] 1.8 Admin: nova empresa (T12)
 - [ ] 1.9 Admin: abrir empresa, editar, clonar, suspender/reativar
