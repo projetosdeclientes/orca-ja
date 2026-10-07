@@ -15,6 +15,13 @@ describe("motor de cálculo", () => {
     expect(r.valor_total).toBe(1482);
   });
 
+  it("Box de correr 123x187 usa área exata 2,3001 = 1.495,07", () => {
+    const r = calcularItem({ produto: boxCorrer, opcoes: [incolor, branca], largura_cm: 123, altura_cm: 187, quantidade: 1 });
+    expect(r.area_m2).toBe(2.3);
+    expect(r.valor_total).toBe(1495.07);
+  });
+
+
   it("Box de correr 100x150 Fumê Preta = 1.185,00", () => {
     const r = calcularItem({ produto: boxCorrer, opcoes: [fume, preta], largura_cm: 100, altura_cm: 150, quantidade: 1 });
     expect(r.area_m2).toBe(1.5);

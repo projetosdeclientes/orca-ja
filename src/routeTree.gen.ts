@@ -17,6 +17,7 @@ import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedClienteRouteImport } from './routes/_authenticated/_cliente'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as OTokenRouteImport } from './routes/o.$token'
 import { Route as AuthenticatedClienteConfigRouteImport } from './routes/_authenticated/_cliente/config'
 import { Route as AuthenticatedClienteNovoRouteImport } from './routes/_authenticated/_cliente/novo'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
@@ -63,6 +64,11 @@ const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const OTokenRoute = OTokenRouteImport.update({
+  id: '/o/$token',
+  path: '/o/$token',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedClienteConfigRoute =
   AuthenticatedClienteConfigRouteImport.update({
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/privacidade': typeof PrivacidadeRoute
   '/termos': typeof TermosRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/o/$token': typeof OTokenRoute
   '/config': typeof AuthenticatedClienteConfigRoute
   '/novo': typeof AuthenticatedClienteNovoRoute
   '/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
@@ -134,6 +141,7 @@ export interface FileRoutesByTo {
   '/primeiro-acesso': typeof PrimeiroAcessoRoute
   '/privacidade': typeof PrivacidadeRoute
   '/termos': typeof TermosRoute
+  '/o/$token': typeof OTokenRoute
   '/config': typeof AuthenticatedClienteConfigRoute
   '/novo': typeof AuthenticatedClienteNovoRoute
   '/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
@@ -153,6 +161,7 @@ export interface FileRoutesById {
   '/termos': typeof TermosRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/_cliente': typeof AuthenticatedClienteRouteWithChildren
+  '/o/$token': typeof OTokenRoute
   '/_authenticated/_cliente/config': typeof AuthenticatedClienteConfigRoute
   '/_authenticated/_cliente/novo': typeof AuthenticatedClienteNovoRoute
   '/_authenticated/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
@@ -171,6 +180,7 @@ export interface FileRouteTypes {
     | '/privacidade'
     | '/termos'
     | '/admin'
+    | '/o/$token'
     | '/config'
     | '/novo'
     | '/admin/configuracoes'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/primeiro-acesso'
     | '/privacidade'
     | '/termos'
+    | '/o/$token'
     | '/config'
     | '/novo'
     | '/admin/configuracoes'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/_authenticated/admin'
     | '/_authenticated/_cliente'
+    | '/o/$token'
     | '/_authenticated/_cliente/config'
     | '/_authenticated/_cliente/novo'
     | '/_authenticated/admin/configuracoes'
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   PrimeiroAcessoRoute: typeof PrimeiroAcessoRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   TermosRoute: typeof TermosRoute
+  OTokenRoute: typeof OTokenRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -280,6 +293,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin'
       preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/o/$token': {
+      id: '/o/$token'
+      path: '/o/$token'
+      fullPath: '/o/$token'
+      preLoaderRoute: typeof OTokenRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/_cliente/config': {
       id: '/_authenticated/_cliente/config'
@@ -398,6 +418,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrimeiroAcessoRoute: PrimeiroAcessoRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   TermosRoute: TermosRoute,
+  OTokenRoute: OTokenRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
