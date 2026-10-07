@@ -1,4 +1,4 @@
-import { data as fmtData, moeda, numeroOrcamento } from "@/lib/format";
+import { data as fmtData, mascaraTelefone, moeda, numeroOrcamento } from "@/lib/format";
 
 export interface DocItem { produto_nome: string; descricao: string | null; quantidade: number; valor_total: number }
 export interface DocAdicional { nome: string; valor_calculado: number }
@@ -54,6 +54,12 @@ export function DocumentoOrcamento({ d }: { d: DocDados }) {
           {e.condicoes_pagamento && <p><strong>Condições:</strong> {e.condicoes_pagamento}</p>}
           {e.prazo_entrega_padrao && <p><strong>Prazo de entrega:</strong> {e.prazo_entrega_padrao}</p>}
         </div>
+      )}
+      {(e.endereco || e.whatsapp) && (
+        <footer className="border-t border-border pt-3 text-center text-xs text-muted-foreground">
+          {e.endereco && <p>{e.endereco}</p>}
+          {e.whatsapp && <p>WhatsApp: {mascaraTelefone(e.whatsapp)}</p>}
+        </footer>
       )}
     </article>
   );

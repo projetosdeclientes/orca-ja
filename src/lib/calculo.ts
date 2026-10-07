@@ -64,8 +64,9 @@ export function calcularItem(e: EntradaItem): ResultadoItem {
   const largura = num(e.largura_cm);
   const altura = num(e.altura_cm);
   const qtd = Math.max(1, Math.floor(num(e.quantidade)) || 1);
-  const area_m2 = r2((largura * altura) / 10000);
-  const areaCobrada = Math.max(area_m2, num(e.produto.area_minima));
+  const areaExata = (largura * altura) / 10000;
+  const area_m2 = r2(areaExata); // só para exibição/gravação
+  const areaCobrada = Math.max(areaExata, num(e.produto.area_minima));
   const preco = num(e.produto.preco_base);
 
   let valor_base: number;
