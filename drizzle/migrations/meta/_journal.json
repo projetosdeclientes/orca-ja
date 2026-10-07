@@ -15,6 +15,13 @@
       "when": 1791235548491,
       "tag": "0001_logos_policies",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791385085195,
+      "tag": "0002_empresa_notas_admin",
+      "breakpoints": true
     }
   ]
 }
