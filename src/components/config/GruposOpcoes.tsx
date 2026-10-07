@@ -29,7 +29,7 @@ export function GruposOpcoes({ produto, onMudou }: Props) {
   );
 }
 
-interface CartaoProps { g: Grupo; anterior?: Grupo; proximo?: Grupo; i: number; exec: (p: PromiseLike<{ error: unknown }>) => Promise<void>; onMudou: () => void }
+interface CartaoProps { g: Grupo; anterior: Grupo | undefined; proximo: Grupo | undefined; i: number; exec: (p: PromiseLike<{ error: unknown }>) => Promise<void>; onMudou: () => void }
 
 function CartaoGrupo({ g, anterior, proximo, i, exec, onMudou }: CartaoProps) {
   const mover = async (o: Grupo | undefined, j: number) => { if (o) { await trocarOrdem("grupos_opcao", g, o, i, j); onMudou(); } };
@@ -49,7 +49,7 @@ function CartaoGrupo({ g, anterior, proximo, i, exec, onMudou }: CartaoProps) {
   );
 }
 
-interface LinhaProps { o: Opcao; j: number; anterior?: Opcao; proximo?: Opcao; exec: CartaoProps["exec"]; onMudou: () => void }
+interface LinhaProps { o: Opcao; j: number; anterior: Opcao | undefined; proximo: Opcao | undefined; exec: CartaoProps["exec"]; onMudou: () => void }
 
 function LinhaOpcao({ o, j, anterior, proximo, exec, onMudou }: LinhaProps) {
   const upd = (c: Partial<Opcao>) => exec(supabase.from("opcoes").update(c).eq("id", o.id));
