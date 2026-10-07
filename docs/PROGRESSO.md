@@ -21,15 +21,15 @@
 - [x] 2.5 Dados de demonstração e modelos
 
 ## Etapa 3: Motor de cálculo e novo orçamento
-- [ ] 3.1 Função de cálculo + testes
+- [x] 3.1 Função de cálculo + testes
 - [ ] 3.2 Wizard /novo
 - [ ] 3.3 Salvar e WhatsApp
 
 ## Etapa 4: Lista, detalhe e página pública
 - [ ] 4.1 Lista /orcamentos
 - [ ] 4.2 Detalhe /orcamentos/:id
-- [ ] 4.3 Página pública /o/:token
-- [ ] 4.4 PDF (impressão)
+- [x] 4.3 Página pública /o/:token
+- [x] 4.4 PDF (impressão)
 
 ## Etapa 5: Polimento e segurança
 - [ ] 5.1 Estados vazios, carregamento e erros
