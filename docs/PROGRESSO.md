@@ -11,6 +11,8 @@
 - [x] 1.8 Admin: nova empresa (T12)
 - [x] 1.9 Admin: abrir empresa, editar, clonar, suspender/reativar
 
+- [x] S1 Proteger campos administrativos de empresas (notas em tabela própria + trigger)
+
 ## Etapa 2: Configuração da empresa (/config)
 - [ ] 2.1 Aba Identidade
 - [ ] 2.2 Aba Produtos: lista e edição

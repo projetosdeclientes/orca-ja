@@ -41,8 +41,12 @@ function EditarEmpresa() {
     setSalvando(true);
     const { error: e } = await supabase
       .from("empresas")
-      .update({ nome: f.nome.trim(), whatsapp: whatsComDDI(f.whatsapp) || null, pago_ate: f.pago_ate || null, observacoes_admin: f.observacoes_admin || null, ativo: f.ativo })
+      .update({ nome: f.nome.trim(), whatsapp: whatsComDDI(f.whatsapp) || null, pago_ate: f.pago_ate || null, ativo: f.ativo })
       .eq("id", id);
+    const { error: eNotas } = e
+      ? { error: null }
+      : await supabase.from("empresa_notas_admin").upsert({ empresa_id: id, notas: f.observacoes_admin || null, atualizado_em: new Date().toISOString() });
+    if (eNotas) { setSalvando(false); toast.error("Dados salvos, mas não foi possível salvar as observações."); return; }
     setSalvando(false);
     if (e) { toast.error("Não foi possível salvar."); return; }
     toast.success("Alterações salvas.");
@@ -57,7 +61,7 @@ function EditarEmpresa() {
       <div className="space-y-2"><Label htmlFor="f-nome">Nome</Label><Input id="f-nome" className={c} value={f.nome} onChange={(e) => setF({ ...f, nome: e.target.value })} /></div>
       <div className="space-y-2"><Label htmlFor="f-whats">WhatsApp</Label><Input id="f-whats" className={c} inputMode="tel" value={mascaraTelefone(f.whatsapp)} onChange={(e) => setF({ ...f, whatsapp: e.target.value })} /></div>
       <div className="space-y-2"><Label htmlFor="f-pago">Pago até</Label><Input id="f-pago" className={c} type="date" value={f.pago_ate} onChange={(e) => setF({ ...f, pago_ate: e.target.value })} /></div>
-      <div className="space-y-2"><Label htmlFor="f-obs">Observações internas (só o admin vê)</Label><Textarea className="rounded-xl" value={f.observacoes_admin} onChange={(e) => setF({ ...f, observacoes_admin: e.target.value })} /></div>
+      <div className="space-y-2"><Label htmlFor="f-obs">Observações internas (só o admin vê)</Label><Textarea id="f-obs" className="rounded-xl" value={f.observacoes_admin} onChange={(e) => setF({ ...f, observacoes_admin: e.target.value })} /></div>
       <label className="flex items-center justify-between text-sm font-medium">Empresa ativa <Switch checked={f.ativo} onCheckedChange={(v) => setF({ ...f, ativo: v })} /></label>
       <div className="flex flex-wrap gap-2 pt-2">
         <Button onClick={salvar} disabled={salvando} className="h-11 flex-1 rounded-xl">{salvando ? <Loader2 className="h-4 w-4 animate-spin" /> : "Salvar"}</Button>

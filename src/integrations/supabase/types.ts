@@ -81,6 +81,32 @@ export type Database = {
           },
         ]
       }
+      empresa_notas_admin: {
+        Row: {
+          atualizado_em: string
+          empresa_id: string
+          notas: string | null
+        }
+        Insert: {
+          atualizado_em?: string
+          empresa_id: string
+          notas?: string | null
+        }
+        Update: {
+          atualizado_em?: string
+          empresa_id?: string
+          notas?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "empresa_notas_admin_empresa_id_fkey"
+            columns: ["empresa_id"]
+            isOneToOne: true
+            referencedRelation: "empresas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       empresas: {
         Row: {
           ativo: boolean
