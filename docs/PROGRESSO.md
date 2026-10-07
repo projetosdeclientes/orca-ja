@@ -16,7 +16,7 @@
 - [ ] 2.2 Aba Produtos: lista e edição
 - [ ] 2.3 Grupos e opções do produto
 - [ ] 2.4 Aba Adicionais
-- [ ] 2.5 Dados de demonstração e modelos
+- [x] 2.5 Dados de demonstração e modelos
 
 ## Etapa 3: Motor de cálculo e novo orçamento
 - [ ] 3.1 Função de cálculo + testes
